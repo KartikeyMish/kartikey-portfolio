@@ -1,41 +1,98 @@
 <?php
-  /**
-  * Requires the "PHP Email Form" library
-  * The "PHP Email Form" library is available only in the pro version of the template
-  * The library should be uploaded to: vendor/php-email-form/php-email-form.php
-  * For more info and help: https://bootstrapmade.com/php-email-form/
-  */
 
-  // Replace contact@example.com with your real receiving email address
-  $receiving_email_address = 'contact@example.com';
+// Include packages and files for PHPMailer and SMTP protocol
 
-  if( file_exists($php_email_form = '../assets/vendor/php-email-form/php-email-form.php' )) {
-    include( $php_email_form );
-  } else {
-    die( 'Unable to load the "PHP Email Form" Library!');
-  }
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
 
-  $contact = new PHP_Email_Form;
-  $contact->ajax = true;
-  
-  $contact->to = $receiving_email_address;
-  $contact->from_name = $_POST['name'];
-  $contact->from_email = $_POST['email'];
-  $contact->subject = $_POST['subject'];
+require 'PHPMailer-master/src/Exception.php';
+require 'PHPMailer-master/src/PHPMailer.php';
+require 'PHPMailer-master/src/SMTP.php';
 
-  // Uncomment below code if you want to use SMTP to send emails. You need to enter your correct SMTP credentials
-  /*
-  $contact->smtp = array(
-    'host' => 'example.com',
-    'username' => 'example',
-    'password' => 'pass',
-    'port' => '587'
-  );
-  */
+// Initialize PHP mailer, configure to use SMTP protocol and add credentials
 
-  $contact->add_message( $_POST['name'], 'From');
-  $contact->add_message( $_POST['email'], 'Email');
-  $contact->add_message( $_POST['message'], 'Message', 10);
+$mail = new PHPMailer();
+$mail->IsSMTP();
+$mail->Mailer = "smtp";
 
-  echo $contact->send();
-?>
+$mail->SMTPDebug  = 0;
+$mail->SMTPAuth   = TRUE;
+$mail->SMTPSecure = "ssl";
+$mail->Port       = 465;
+$mail->Host       = "smtp.gmail.com";
+$mail->Username   = "eclassroom1999@gmail.com";
+$mail->Password   = "gxptrkpjfvmrqbce";
+
+
+$success = "";
+$error = "";
+$name = $message = $email = "";
+$errors = array('name' => '', 'email' => '', 'message' => '');
+
+if (isset($_POST["submit"])) {
+    if (empty(trim($_POST["name"]))) {
+        $errors['name'] = "Your name is required";
+    } else {
+        $name = SanitizeString($_POST["name"]);
+        if (!preg_match('/^[a-zA-Z\s]{6,50}$/', $name)) {
+            $errors['name'] = "Only letters and spaces allowed";
+        }
+    }
+
+    if (empty(trim($_POST["email"]))) {
+        $errors["email"] = "Your email is required";
+    } else {
+        $email = SanitizeString($_POST["email"]);
+        if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+            $errors["email"] = "Pls give a proper email address";
+        }
+    }
+
+    if (empty(trim($_POST["message"]))) {
+        $errors["message"] = "Please type your message";
+    } else {
+        $message = SanitizeString($_POST["message"]);
+        if (!preg_match("/^[a-zA-Z\d\s]+$/", $message)) {
+            $errors["message"] = "Only letters, spaces and maybe numbers allowed";
+        }
+    }
+
+    if (array_filter($errors)) {
+    } else {
+        try {
+
+            $mail->setFrom('eclassroom1999@gmail', 'Anirudha B Shetty');
+
+            $mail->addAddress($email, $name);
+
+            $mail->Subject = 'Build a contact form with PHP';
+
+            $mail->Body = $message;
+
+            // send mail
+
+            $mail->send();
+
+            // empty users input
+
+            $name = $message = $email = "";
+
+            $success = "Message sent successfully";
+        } catch (Exception $e) {
+
+            // echo $e->errorMessage(); use for testing & debugging purposes
+            $error = "Sorry message could not send, try again";
+        } catch (Exception $e) {
+
+            // echo $e->getMessage(); use for testing & debugging purposes
+            $error = "Sorry message could not send, try again";
+        }
+    }
+}
+
+function SanitizeString($var)
+{
+    $var = strip_tags($var);
+    $var = htmlentities($var);
+    return stripslashes($var);
+}
