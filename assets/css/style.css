@@ -32,7 +32,10 @@ h5,
 h6 {
   font-family: "Raleway", sans-serif;
 }
-
+/* h2{
+  text-align: center;
+}
+h2::after{} */
 /*--------------------------------------------------------------
 # Back to top button
 --------------------------------------------------------------*/
@@ -352,6 +355,15 @@ section {
   color: #173b6c;
 }
 
+summary,sas {
+  font-weight: 700;
+  color: #173b6c;
+}
+sas{
+  font-size: 20px;
+}
+
+
 .about .content ul {
   list-style: none;
   padding: 0;
@@ -392,7 +404,7 @@ section {
 
 .facts .count-box i {
   display: block;
-  font-size: 44px;
+  font-size: 54px;
   color: #149ddd;
   float: left;
   line-height: 0;
@@ -438,6 +450,7 @@ section {
     text-align: center;
     margin-top: 60px;
 }
+
 /*--------------------------------------------------------------
 # Akills
 --------------------------------------------------------------*/
