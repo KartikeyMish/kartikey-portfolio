@@ -655,13 +655,14 @@ sas{
 --------------------------------------------------------------*/
 .portfolio-details {
   padding-top: 40px;
+  position:relative;
 }
 
 .portfolio-details .portfolio-details-slider img {
   width: 100%;
 }
 
-.portfolio-details .portfolio-details-slider .swiper-pagination {
+.portfolio-details .portfolio-details-slider .swiper-pagination .container{
   margin-top: 20px;
   position: relative;
 }
@@ -1043,3 +1044,20 @@ sas{
     padding-right: 20px 15px;
   }
 }
+
+<div class="portfolio-info">
+              <h3>Project information</h3>
+              <ul>
+                <li><strong>Category</strong>: Data Science</li>
+                <li><strong>Topic</strong>: Customer / User Sentiment Analysis</li>
+                <li><strong>Project date</strong>: 7 Sept, 2022</li>
+                <li><strong>Project URL</strong>: <a href="https://github.com/KartikeyMish/Senal">github.com/KartikeyMish/Senal</a></li>
+              </ul>
+            </div>
+            <div class="portfolio-description">
+              <h2>Senal - Details</h2>
+              <p>
+                <Strong>Description</Strong>: A data science project employing NLP, ML, and real-time processing to create an accurate
+                sentiment analysis model for text-based data, resulting in actionable customer insights for decision-making. </p>
+              <p><strong>Technology</strong>: Python, TensorFlow, Keras, NLP, Text Mining, Flask, Data Science Tools.</p>
+            </div>
