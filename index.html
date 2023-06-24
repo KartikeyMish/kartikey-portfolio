@@ -342,7 +342,7 @@
         </div>
         <br><div data-aos="fade-bottom"><i class="bi bi-file-pdf"></i>  <a href="https://drive.google.com/uc?export=download&id=13PDwAzEGE1XWH7P0FiNw2F8PSby1l-DL" title="Download in pdf">Download as PDF</a>
         <br><br>
-        <div class="iframe-container" >
+        <div class="iframe-container " data-aos="fade-bottom">
           <iframe src="https://drive.google.com/file/d/13PDwAzEGE1XWH7P0FiNw2F8PSby1l-DL/preview" width="640" height="480" allow="autoplay"></iframe>
         </div>
       </div>
@@ -548,7 +548,7 @@
           </div>
 
           <!-- <div class="col-lg-7 mt-5 mt-lg-0 d-flex align-items-stretch">
-            <form action="forms/contact.php" method="post" role="form" class="php-email-form">
+            <form onsubmit="sendEmail(); reset(); return false;" class="php-email-form">
               <div class="row">
                 <div class="form-group col-md-6">
                   <label for="name">Your Name</label>
@@ -571,31 +571,32 @@
                 <div class="loading">Loading</div>
                 <div class="error-message"></div>
                 <div class="sent-message">Thankyou for contacting</div>
+                <button type="submit">Send Message</button>
               </div>
-              <div class="text-center"><button type="submit">Send Message</button></div>
             </form>
             
-          </div> -->
-
-          <!-- <div class="col-lg-7 mt-5 mt-lg-0 d-flex align-items-stretch">
-            <form action="forms/contact.php" method="post">
-              <label for="name">Your Name</label>
-              <input type="text"  name="name" placeholder="Your name..">
-          
-              <label for="lname">Email</label>
-              <input type="email"  name="email" placeholder="Your email..">
-              <label for="subject">Subject</label>
-              <input type="subject"  name="subject" placeholder="Subject">
-             
-              <label for="message">Message</label>
-              <textarea  name="message" placeholder="Write something.." style="height:200px"></textarea>
-          
-              <Button type="submit" value="Submit"></Button>
-            </form>
-            
-          </div> -->
-
-        </div>
+          </div>
+          <script src="https://smtpjs.com/v3/smtp.js">
+          </script>
+          <script>
+            function sendEmail(){
+              Email.send({
+                  Host : "smtp.smtp.elasticemail.com",
+                  Username : "kartikeymishra626@gmail.com",
+                  Password : "D8CE70DEBFE5B5FC576FE2C63E28F0F5069D",
+                  To : 'kartikeymishra626@gmail.com',
+                  From : document.getElementById("email").value,
+                  Subject : document.getElementById("subject").value,
+                  Body : "<br> Name : " +document.getElementById("name").value +
+                  "<br> Email : " +document.getElementById("email").value +
+                  "<br> Message : " +document.getElementById("message").value 
+                }).then(
+                message => alert(message)
+              );
+            }
+          </script>
+  
+        </div> -->
 
       </div>
     </section><!-- End Contact Section -->
