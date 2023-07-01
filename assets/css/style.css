@@ -554,6 +554,7 @@ sas{
 --------------------------------------------------------------*/
 .portfolio .portfolio-item {
   margin-bottom: 30px;
+  
 }
 
 .portfolio #portfolio-flters {
@@ -594,7 +595,9 @@ sas{
   overflow: hidden;
   z-index: 1;
 }
-
+.portfolio-wrap{
+  border-radius: 10px;
+}
 .portfolio .portfolio-wrap::before {
   content: "";
   background: rgba(255, 255, 255, 0.5);
