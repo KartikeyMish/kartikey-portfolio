@@ -1144,7 +1144,7 @@ sas{
   padding: 10px 15px;
 }
 
-  /* .contact .php-email-form button[type=submit] {
+  .contact .php-email-form button[type=submit] {
     background: #149ddd;
     border: 0;
     padding: 10px 24px;
@@ -1155,7 +1155,7 @@ sas{
 
   .contact .php-email-form button[type=submit]:hover {
     background: #37b3ed;
-  } */
+  }
 
 @keyframes animate-loading {
   0% {
